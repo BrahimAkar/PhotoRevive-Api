@@ -1,4 +1,4 @@
-name: 'postgoo_app_api_ts'
+name: 'photo-revive-api'
 # Start your api with Optic by running 'api run <taskname>'
 tasks:
   start:

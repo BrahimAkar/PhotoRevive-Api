@@ -18,8 +18,8 @@ export default {
   /**
    * Database url and name
    */
-  databaseURL: process.env.MONGODB_URI,
-  databaseName: process.env.MONGODB_NAME,
+  databaseURL: process.env.MONGODB_URI_FULL,
+  databaseName: process.env.MONGODB_DB_NAME,
 
   /**
    * JWT secret for signing tokens
