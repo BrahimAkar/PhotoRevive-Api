@@ -4,7 +4,7 @@ import { Container } from 'typedi';
 import LoggerInstance from './logger';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-export default ({ mongoConnection }: { mongoConnection }) => {
+export default ({ mongoConnection, redisConnection }: { mongoConnection; redisConnection }) => {
   try {
     Container.set('logger', LoggerInstance);
 
@@ -13,6 +13,10 @@ export default ({ mongoConnection }: { mongoConnection }) => {
     Container.set('mongoConnection', mongoConnection);
 
     LoggerInstance.info('✌️ MongoDB Connection injected into container');
+
+    Container.set('redis', redisConnection);
+
+    LoggerInstance.info('✌️ Redis Connection injected into container');
 
     return {};
   } catch (e) {

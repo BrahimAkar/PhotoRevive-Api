@@ -22,6 +22,12 @@ export default {
   databaseName: process.env.MONGODB_DB_NAME,
 
   /**
+   * Redis url
+   * @see https://redis.io/topics/quickstart
+   */
+  redisURL: process.env.REDIS_URI_FULL,
+
+  /**
    * JWT secret for signing tokens
    */
   jwtSecret: process.env.JWT_SECRET,
