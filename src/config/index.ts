@@ -71,4 +71,7 @@ export default {
     apiUsername: process.env.MAILGUN_USERNAME,
     domain: process.env.MAILGUN_DOMAIN,
   },
+  AiModelsVersions: {
+    faceRestoration: '9283608cc6b7be6b65a8e44983db012355fde4132009bf99d976b2f0896856a3',
+  },
 };

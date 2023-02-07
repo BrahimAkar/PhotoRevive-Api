@@ -4,7 +4,7 @@ import { default as Redis } from 'ioredis';
 import { Request, Response, NextFunction } from 'express';
 
 const WINDOW_SIZE_IN_HOURS = 1;
-const MAX_WINDOW_REQUEST_COUNT = 100;
+const MAX_WINDOW_REQUEST_COUNT = 3;
 const WINDOW_LOG_INTERVAL_IN_HOURS = 1;
 
 const checkRateLimit = async (req: Request, res: Response, next: NextFunction): Promise<boolean | void> => {
