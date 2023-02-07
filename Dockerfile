@@ -17,7 +17,7 @@ RUN npm install argon2
 COPY . .
 
 # Copy the .env file
-COPY .env .
+# COPY .env .
 
 # Expose the application port
 EXPOSE 3000

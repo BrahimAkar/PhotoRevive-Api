@@ -4,16 +4,18 @@ import { default as Redis } from 'ioredis';
 import { Request, Response, NextFunction } from 'express';
 
 const WINDOW_SIZE_IN_HOURS = 1;
-const MAX_WINDOW_REQUEST_COUNT = 3;
+const MAX_WINDOW_REQUEST_COUNT = 10;
 const WINDOW_LOG_INTERVAL_IN_HOURS = 1;
 
 const checkRateLimit = async (req: Request, res: Response, next: NextFunction): Promise<boolean | void> => {
   const redis: Redis = Container.get('redis');
+  // clear all records from redis on server start
+  // await redis.flushall();
   try {
     // check that redis client exists
     if (!redis) {
       throw new Error('Redis client does not exist!');
-      process.exit(1);
+      // process.exit(1);
     }
     // fetch records of current user using IP address, returns null when no record is found
     const record = await redis.get(req.ip);
