@@ -1,10 +1,15 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Container } from 'typedi';
 import LoggerInstance from './logger';
+import { Connection } from 'mongoose';
+import { Redis } from 'ioredis';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-export default ({ mongoConnection, redisConnection }: { mongoConnection; redisConnection }) => {
+export default ({
+  mongoConnection,
+  redisConnection,
+}: {
+  mongoConnection: Connection;
+  redisConnection: Redis;
+}): void => {
   try {
     Container.set('logger', LoggerInstance);
 
@@ -17,8 +22,6 @@ export default ({ mongoConnection, redisConnection }: { mongoConnection; redisCo
     Container.set('redis', redisConnection);
 
     LoggerInstance.info('✌️ Redis Connection injected into container');
-
-    return {};
   } catch (e) {
     LoggerInstance.error('🔥 Error on dependency injector loader: %o', e);
     throw e;
