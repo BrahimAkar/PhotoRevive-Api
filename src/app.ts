@@ -1,14 +1,15 @@
-import 'reflect-metadata'; // We need this in order to use @Decorators
-
-import config from './config';
-
 import express from 'express';
+import 'reflect-metadata'; // We need this in order to use @Decorators
+// import loader
+import FixerController from './api/resources/fixer/fixer.controller';
+import SimpleController from './api/resources/simple/simple.controller';
+import { App } from './loaders/express';
+import validateEnv from './utils/validateEnv';
 
-import Logger from './loaders/logger';
+validateEnv(); // validate the environment variables before starting the server (see utils/validateEnv.ts)
 
 async function startServer() {
   const app = express();
-
   /**
    * A little hack here
    * Import/Export can only be used in 'top-level code'
@@ -17,19 +18,7 @@ async function startServer() {
    **/
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   await require('./loaders').default({ expressApp: app });
-
-  app
-    .listen(config.port, () => {
-      Logger.info(`
-        ################################################
-        🛡️  Server listening on port: ${config.port} 🛡️
-        ################################################
-      `);
-    })
-    .on('error', err => {
-      Logger.error(err);
-      process.exit(1);
-    });
+  new App([new SimpleController(), new FixerController()], Number(process.env.PORT), app).listen();
 }
 
 startServer();

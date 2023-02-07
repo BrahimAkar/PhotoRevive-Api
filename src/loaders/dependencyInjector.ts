@@ -1,15 +1,9 @@
 import { Container } from 'typedi';
 import LoggerInstance from './logger';
-import { Connection } from 'mongoose';
+import { Db } from 'mongodb';
 import { Redis } from 'ioredis';
 
-export default ({
-  mongoConnection,
-  redisConnection,
-}: {
-  mongoConnection: Connection;
-  redisConnection: Redis;
-}): void => {
+export default ({ mongoConnection, redisConnection }: { mongoConnection: Db; redisConnection: Redis }): void => {
   try {
     Container.set('logger', LoggerInstance);
 

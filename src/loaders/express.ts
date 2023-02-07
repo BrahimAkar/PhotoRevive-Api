@@ -1,9 +1,73 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import express, { NextFunction } from 'express';
+import express, { Application, NextFunction } from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import { OpticMiddleware } from '@useoptic/express-middleware';
 import routes from '@/api';
 import config from '@/config';
+import Controller from '../utils/interfaces/controller.interface';
+
+export class App {
+  public port: number;
+  public app: Application;
+
+  // constructor
+  constructor(controllers: Controller[], port: number, app: Application) {
+    this.port = port;
+    this.app = app;
+    this.initializeMiddlewares();
+    this.initializeControllers(controllers);
+    this.initializeErrorHandling();
+    this.initializeNotFoundHandling();
+  }
+
+  private initializeNotFoundHandling(): void {
+    this.app.use((req: express.Request, res: express.Response, next: NextFunction) => {
+      const error = new Error(`Not found - ${req.originalUrl}, Please check the API Documentation.`);
+      res.status(404);
+      next(error);
+    });
+  }
+
+  private initializeErrorHandling(): void {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    this.app.use((err: Error, req: express.Request, res: express.Response, next: NextFunction) => {
+      console.error(err);
+      res.status(500).json({
+        message: err.message,
+      });
+    });
+  }
+
+  // initialize database connection
+  private initializeMiddlewares(): void {
+    this.app.use(helmet());
+    this.app.use(cors());
+
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
+    // Useful if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
+    // It shows the real origin IP in the heroku or Cloudwatch logs
+    this.app.enable('trust proxy');
+    // API Documentation
+    this.app.use(
+      OpticMiddleware({
+        enabled: process.env.NODE_ENV !== 'production',
+      }),
+    );
+  }
+  private initializeControllers(controllers: Controller[]): void {
+    controllers.forEach((controller: Controller) => {
+      this.app.use(config.api.prefix, controller.router);
+    });
+  }
+  public listen(): void {
+    this.app.listen(this.port, () => {
+      console.log(`App listening on the port ${this.port}`);
+    });
+  }
+}
+
 export default ({ app }: { app: express.Application }) => {
   /**
    * Health Check endpoints
@@ -36,6 +100,7 @@ export default ({ app }: { app: express.Application }) => {
   app.use(express.json());
   // Load API routes
   app.use(config.api.prefix, routes());
+  // Experimental: Initialize Controllers
 
   // API Documentation
   app.use(
@@ -71,3 +136,5 @@ export default ({ app }: { app: express.Application }) => {
     });
   });
 };
+
+// export default App;
