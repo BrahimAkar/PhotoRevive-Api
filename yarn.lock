@@ -1955,6 +1955,18 @@
     "@typescript-eslint/types" "4.33.0"
     "eslint-visitor-keys" "^2.0.0"
 
+"@upstash/ratelimit@^0.3.2":
+  "integrity" "sha512-IDO7jHbUFwrVDB9QZI0QRRYiBqlvfqZo44JonYlA3ZsYL6Rjx22mFsuyW0nYQtCCYry6ErxTtluObRDrX4tMUg=="
+  "resolved" "https://registry.npmjs.org/@upstash/ratelimit/-/ratelimit-0.3.2.tgz"
+  "version" "0.3.2"
+
+"@upstash/redis@^1.19.3":
+  "integrity" "sha512-s65cUpjMIrUeRy0oxhDwo2vwbHbs1FawVl3bsNioXqRqISTNLMqDtgktaefei4/V1DI+eymvbz32m0CpFJZPKQ=="
+  "resolved" "https://registry.npmjs.org/@upstash/redis/-/redis-1.19.3.tgz"
+  "version" "1.19.3"
+  dependencies:
+    "isomorphic-fetch" "^3.0.0"
+
 "@useoptic/express-middleware@^0.0.5":
   "integrity" "sha512-p+VEDALXPEDLQHNfM++JdWWg9WauvYUahc4P8ts78G7XbxK2lAtQolQ7kSXxgwtAYAb/V+0dyemh9ovVA2YyYA=="
   "resolved" "https://registry.npmjs.org/@useoptic/express-middleware/-/express-middleware-0.0.5.tgz"
@@ -4396,6 +4408,14 @@
   "resolved" "https://registry.npmjs.org/isobject/-/isobject-3.0.1.tgz"
   "version" "3.0.1"
 
+"isomorphic-fetch@^3.0.0":
+  "integrity" "sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA=="
+  "resolved" "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-3.0.0.tgz"
+  "version" "3.0.0"
+  dependencies:
+    "node-fetch" "^2.6.1"
+    "whatwg-fetch" "^3.4.1"
+
 "istanbul-lib-coverage@^3.0.0", "istanbul-lib-coverage@^3.2.0":
   "integrity" "sha512-eOeJ5BHCmHYvQK7xt9GkdHuzuCGS1Y6g9Gvnx3Ym33fz/HpLRYxiS0wHNr+m/MBC8B647Xt608vCDEvhl9c6Mw=="
   "resolved" "https://registry.npmjs.org/istanbul-lib-coverage/-/istanbul-lib-coverage-3.2.0.tgz"
@@ -5451,7 +5471,7 @@
   dependencies:
     "moment" ">= 2.9.0"
 
-"moment@^2.29.0", "moment@>= 2.9.0":
+"moment@^2.29.4", "moment@>= 2.9.0":
   "integrity" "sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w=="
   "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz"
   "version" "2.29.4"
@@ -7385,6 +7405,11 @@
   "version" "1.0.5"
   dependencies:
     "iconv-lite" "0.4.24"
+
+"whatwg-fetch@^3.4.1":
+  "integrity" "sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA=="
+  "resolved" "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz"
+  "version" "3.6.2"
 
 "whatwg-mimetype@^2.3.0":
   "integrity" "sha512-M4yMwr6mAnQz76TbJm914+gPpB/nCwvZbJU28cUD6dR004SAxDLOOSUaB1JDRqLtaOV/vi0IC5lEAGFgrjGv/g=="

@@ -26,6 +26,7 @@ export default {
    * @see https://redis.io/topics/quickstart
    */
   redisURL: process.env.REDIS_URI_FULL,
+  redisToken: process.env.UPSTASH_REDIS_REST_TOKEN,
 
   /**
    * JWT secret for signing tokens
