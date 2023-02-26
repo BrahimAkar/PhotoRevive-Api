@@ -3,7 +3,15 @@ import LoggerInstance from './logger';
 import { Db } from 'mongodb';
 import { Redis } from 'ioredis';
 
-export default ({ mongoConnection, redisConnection }: { mongoConnection: Db; redisConnection: Redis }): void => {
+export default ({
+  mongoConnection,
+  redisConnection,
+  firebaseApp,
+}: {
+  mongoConnection: Db;
+  redisConnection: Redis;
+  firebaseApp;
+}): void => {
   try {
     Container.set('logger', LoggerInstance);
 
@@ -16,6 +24,10 @@ export default ({ mongoConnection, redisConnection }: { mongoConnection: Db; red
     Container.set('redis', redisConnection);
 
     LoggerInstance.info('✌️ Redis Connection injected into container');
+
+    Container.set('firebase', firebaseApp);
+
+    LoggerInstance.info('✌️ Firebase App injected into container');
   } catch (e) {
     LoggerInstance.error('🔥 Error on dependency injector loader: %o', e);
     throw e;

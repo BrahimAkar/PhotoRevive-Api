@@ -16,11 +16,13 @@ RUN npm install argon2
 # Copy the application code
 COPY . .
 
-# Copy the .env file
-# COPY .env .
+# Build the application
+RUN npm run build
 
-# Expose the application port
+# Expose the port
+
 EXPOSE 3000
 
 # Start the application
-CMD ["npm", "start"]
+
+CMD [ "npm", "start" ]

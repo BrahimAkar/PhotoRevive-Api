@@ -6,6 +6,7 @@ import IController from '@/utils/interfaces/controller.interface';
 import HttpException from '@/utils/exceptions/http.exception';
 import SimpleService from './simple.service';
 import validationMiddleware from '@/api/middlewares/validation.middleware';
+import middlewares from '../../middlewares/index';
 import validate from './simple.validation';
 import { Logger } from 'winston';
 import { Container } from 'typedi/Container';
@@ -19,7 +20,14 @@ class SimpleController implements IController {
     this.initializeRoutes();
   }
   private initializeRoutes(): void {
-    this.router.get(this.path, validationMiddleware(validate.get), this.getSimple);
+    this.router.get(
+      this.path,
+      middlewares.isValidFirebaseToken,
+      middlewares.restrictTo(['admin']),
+      validationMiddleware(validate.get),
+
+      this.getSimple,
+    );
   }
   private getSimple = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
     try {
